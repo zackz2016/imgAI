@@ -1,0 +1,46 @@
+import { Document, model, models, Schema } from "mongoose";
+
+// 定义数据库模型的接口，用于描述数据的结构和类型，只在代码中起作用
+export interface IImage extends Document {   
+  title: string;
+  transformationType: string;
+  publicId: string;
+  secureUrl: string; 
+  width?: number;
+  height?: number;
+  config?: object; 
+  transformationUrl?: string;
+  aspectRatio?: string;
+  color?: string;
+  prompt?: string;
+  author: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+  };
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+//定义一个数据库模型,控制数据如何存储在MongoDB中，只在数据库中起作用
+const ImageSchema = new Schema ({
+
+    title: { type: String, required: true },
+    transformationType: { type: String, required: true },
+    publicId: { type: String, required: true },
+    secureUrl: { type: URL, required: true }, // 图片的安全URL
+    width: { type: Number },
+    height: { type: Number },
+    config: { type: Object },
+    transformationUrl: { type: URL },  // 图片的转换URL
+    aspectRatio: { type: String },
+    color: { type: String },
+    prompt: { type: String },
+    author: { type: Schema.Types.ObjectId, ref: 'User' },  // 作者ID
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
+})
+
+const Image = models?.Image || model('Image', ImageSchema); //创建集合'Image'（数据库里面的表）,如果已存在就用现有的，否则创建一个新的
+
+export default Image;
