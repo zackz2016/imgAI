@@ -7,14 +7,14 @@ declare type CreateUserParams = {
   clerkId: string;
   email: string;
   username: string;
-  firstName: string | null;
-  lastName: string | null;
+  firstName: string | null;  //报错之后，添加了null
+  lastName: string | null;   //报错之后，添加了null
   photo: string;
 };
 
 declare type UpdateUserParams = {
-  firstName: string | null;
-  lastName: string | null;
+  firstName: string | null;   //报错之后，添加了null
+  lastName: string | null;    //报错之后，添加了null
   username: string;
   photo: string;
 };
