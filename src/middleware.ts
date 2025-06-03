@@ -1,5 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
+// 可以公开访问的路由
 const isPublicRoute = createRouteMatcher(['/', '/sign-in(.*)', '/sign-up(.*)', 'api/webhooks/clerk', 'api/webhooks/stripe'])
 
 export default clerkMiddleware(async (auth, req) => {
