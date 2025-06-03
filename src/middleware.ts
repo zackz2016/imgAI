@@ -1,15 +1,10 @@
-import { Webhook } from 'svix';
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
-const isProtectedRoute = createRouteMatcher(['/', 'api/Webhooks/stripe', 'api/Webhooks/clerk'])
+const isPublicRoute = createRouteMatcher(['/', '/sign-in(.*)', '/sign-up(.*)', 'api/webhooks/clerk', 'api/webhooks/stripe'])
 
 export default clerkMiddleware(async (auth, req) => {
-  const { userId, redirectToSignIn } = await auth()
-
-  if (!userId && isProtectedRoute(req)) {
-    // Add custom logic to run before redirecting
-
-    return redirectToSignIn()
+  if (!isPublicRoute(req)) {
+    await auth.protect()
   }
 })
 
