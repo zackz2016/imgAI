@@ -5,11 +5,11 @@ export interface IImage extends Document {
   title: string;
   transformationType: string;
   publicId: string;
-  secureUrl: string; 
+  secureURL: string; 
   width?: number;
   height?: number;
   config?: object; 
-  transformationUrl?: string;
+  transformationURL?: string;
   aspectRatio?: string;
   color?: string;
   prompt?: string;
@@ -27,16 +27,16 @@ const ImageSchema = new Schema ({
 
     title: { type: String, required: true },
     transformationType: { type: String, required: true },
-    publicId: { type: String, required: true },
-    secureUrl: { type: URL, required: true }, // 图片的安全URL
+    publicId: { type: String, required: true },  // 图片的唯一ID
+    secureURL: { type: String, required: true }, // 图片的安全URL
     width: { type: Number },
     height: { type: Number },
     config: { type: Object },
-    transformationUrl: { type: URL },  // 图片的转换URL
+    transformationURL: { type: String },  // 图片的转换URL
     aspectRatio: { type: String },
     color: { type: String },
     prompt: { type: String },
-    author: { type: Schema.Types.ObjectId, ref: 'User' },  // 作者ID
+    author: { type: Schema.Types.ObjectId, ref: 'User' },  // author是对象类型，引用User集合，是一个外键
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 })

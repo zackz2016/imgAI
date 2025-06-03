@@ -24,9 +24,9 @@ const Sidebar = () => {
         </Link>
 
         <nav className='sidebar-nav'>
-          <SignedIn>
-            <ul className='sidebar-nav_elements'>
-              {navLinks.slice(0,6).map((link) => {
+          <SignedIn>                                    
+            <ul className='sidebar-nav_elements'>            
+              {navLinks.slice(0,6).map((link) => {        // 从navlinks中获取链接名称，直接显示在侧边栏上
                 const isActive = link.route === pathname  // 判断当前路径是否与导航链接的路由匹配
 
                 return (
@@ -34,7 +34,7 @@ const Sidebar = () => {
                     isActive ? 'bg-purple-gradient text-white' : 'text-gray-700'}`}>
                     <Link className='sidebar-link' href={link.route}>
                       <Image src={link.icon} alt='logo' width={24} height={24} className={`${isActive && "brightness-200"}`} />
-                      {link.label}
+                      {link.label}   
                     </Link>
                   </li>
                 )

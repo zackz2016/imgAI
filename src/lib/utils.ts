@@ -97,19 +97,19 @@ export const debounce = (func: (...args: any[]) => void, delay: number) => {
 };
 
 // GE IMAGE SIZE
-export type AspectRatioKey = keyof typeof aspectRatioOptions;
+export type AspectRatioKey = keyof typeof aspectRatioOptions;  //相当于aspectRatioOptions对象的键，1:1, 3:4, 9:16等
 export const getImageSize = (
   type: string,
   image: any,
   dimension: "width" | "height"
 ): number => {
-  if (type === "fill") {
+  if (type === "fill") {                                                         //如果是fill转换类型
     return (
-      aspectRatioOptions[image.aspectRatio as AspectRatioKey]?.[dimension] ||
+      aspectRatioOptions[image.aspectRatio as AspectRatioKey]?.[dimension] ||    //根据图片的宽高比，获取预设的宽高，如果找不到就返回1000
       1000
     );
   }
-  return image?.[dimension] || 1000;
+  return image?.[dimension] || 1000;            //如果不是fill转换类型，就返回图片实际的宽高，如果没有就用默认值1000
 };
 
 // DOWNLOAD IMAGE

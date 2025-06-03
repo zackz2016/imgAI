@@ -1,3 +1,6 @@
+// 操作数据库的方法，用于增删改查用户信息
+// 异步函数
+
 "use server";
 
 import { revalidatePath } from "next/cache";
@@ -80,13 +83,13 @@ export async function updateCredits(userId: string, creditFee: number) {
 
     const updatedUserCredits = await User.findOneAndUpdate(
       { _id: userId },
-      { $inc: { creditBalance: creditFee }},
-      { new: true }
+      { $inc: { creditBalance: creditFee }},  //使用 MongoDB 的 $inc 更新积分，增加 creditFee
+      { new: true }  //返回更新后的文档（默认返回更新前的）
     )
 
     if(!updatedUserCredits) throw new Error("User credits update failed");
 
-    return JSON.parse(JSON.stringify(updatedUserCredits));
+    return JSON.parse(JSON.stringify(updatedUserCredits)); 
   } catch (error) {
     handleError(error);
   }
